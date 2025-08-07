@@ -1,0 +1,56 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Calculadora Azure</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2em;
+      }
+      input,
+      select,
+      button {
+        margin: 0.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Calculadora Azure</h1>
+    <input type="number" id="a" placeholder="Número A" />
+    <select id="op">
+      <option value="sum">Sumar</option>
+      <option value="sub">Restar</option>
+      <option value="mul">Multiplicar</option>
+      <option value="div">Dividir</option>
+    </select>
+    <input type="number" id="b" placeholder="Número B" />
+    <button onclick="calcular()">Calcular</button>
+    <div id="resultado" style="margin-top: 1em; font-weight: bold"></div>
+
+    <script>
+      async function calcular() {
+        const a = document.getElementById("a").value;
+        const b = document.getElementById("b").value;
+        const op = document.getElementById("op").value;
+        const resultadoDiv = document.getElementById("resultado");
+
+        if (a === "" || b === "") {
+          resultadoDiv.textContent = "Por favor ingresa ambos números.";
+          return;
+        }
+
+        try {
+          // Cambia la URL según tu entorno: local o Azure
+          const url = `https://calculadorademo-dphjg6ccb3cgcvem.eastus-01.azurewebsites.net/api/calculadora?`;
+          const response = await fetch(url);
+          const data = await response.json();
+          resultadoDiv.textContent = "Resultado: " + data.result;
+        } catch (error) {
+          resultadoDiv.textContent = "Error al conectar con la función.";
+        }
+      }
+    </script>
+  </body>
+</html>
