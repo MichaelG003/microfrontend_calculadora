@@ -43,7 +43,7 @@
 
         try {
           // Cambia la URL según tu entorno: local o Azure
-          const url = `https://calculadorademo-dphjg6ccb3cgcvem.eastus-01.azurewebsites.net/api/calculadora?`;
+          const url = `https://calculadorademo-dphjg6ccb3cgcvem.eastus-01.azurewebsites.net/api/calculadora?a=${a}&b=${b}&op=${op}`;
           const response = await fetch(url);
           const data = await response.json();
           resultadoDiv.textContent = "Resultado: " + data.result;
